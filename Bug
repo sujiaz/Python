@@ -1,0 +1,125 @@
+Bug常见类型
+1.粗心导致的语法错误
+    (1)age=input('请输入你的年龄')
+         if age>=18                                  
+          print('成年人，做事需要负法律责任了')   -->'请输入你的年龄'是str类型，无法与整数int（18）进行比较
+    解决：
+        if int(age)>=18:       将str转成int
+   （2）while i<10:
+          print(1)         -->未给i赋值，且没有给i下一步的计算，将会产生死循环
+    解决：
+        i=0
+        while i <10:
+           print(i)
+           i+=1
+   （3）for i in range(3):
+            uname=input('请输入用户名')
+            pwd=input('请输入密码')
+            if uname='admin' and pwd='admin'
+                print('登录成功')
+                break
+            else
+                print('输入有误')
+        else
+             print('对不起，三次均输入错误')    -->一个=为赋值，两个=才是比较
+     解决：
+         if uname=='admin' and pwd='admin'
+ 粗心导致错误的自查宝典：
+     1.漏了末尾的冒号，如if语句，循环语句，else字句等。
+     2.缩进错误，该缩进的没缩进，不该缩进的瞎缩进。
+     3.把英文符号写成中文符号，比如说：引号，冒号，括号。
+     4.字符串拼接的时候，把字符串和数字拼在一起。
+     5.没有定义变量，比如说while的循环条件的变量。
+     6.‘==’比较运算符和‘=’赋值运算符的混用。
+     
+ 2.    知识不熟练导致的问题
+       （1）索引越界问题
+               lst={11,22,33,44}
+               print(lst[4])       -->列表的索引从0开始，这里面列表最多到3
+               
+       （2）append()方法的使用掌握不熟练
+             lst=[]
+             lst=append('A','B','C')
+             print                  -->append是对列表使用的，且一次append只能增加一个值
+       解决：
+             lst.append('A'）
+             lst.append('B')
+             lst.append('C')
+        思路不清导致的问题解决方案：
+              （1）使用print（）函数
+              （2）使用‘#’暂时注释部分代码
+              name=input('请输入你要查询的演员：')
+              for item in lst:
+                   for movie in item:
+                                          -->加上print（movie）来输出确定是下面代码出现问题
+                        actors=movie['actors']
+                        print(actors)
+                        if name in actors:
+                             print(name+'出演了:'+movie)
+            解决：
+               name=input('请输入你要查询的演员:')
+               for item in lst:
+                   act_lst=item['actors']
+                   for actor in act_lst:
+                       if name in actor:
+                           print(name,'出演了',item['title'])
+                        
+      ‘被动掉坑’:程序代码逻辑没有错，知识因为用户错误操作 或者一些‘例外情况’而导致的程序崩溃
+      多个except结构：
+            捕获异常的顺序按照先子类后父类的顺序，为了避免遗漏可能出现的异常，可以在最后增加baseexception
+               try:
+                   n1=int(input('请输入一个整数:')
+                   n2=int(input('请输入另一个整数：')          
+                   result=n1/n2
+                   print('结果为:',result)
+               except ZeroDivisionError:
+                    print('除数不能为0哦)
+               except ValueError:
+                    print('不能将字符串转换为数字')    
+               except BaseException as e:
+                    print(e) 
+               
+       try...except...else结构
+           如果try块中没有抛出异常，则执行else块，如果try中抛出异常，则执行except块
+                 try:
+                      n1=int(input('请输入一个整数:'))
+                      n2=int(input('请输入另一个整数:'))
+                      result=n1/n2
+                  except BaseException as e:     
+                      print('出错了')     
+                      print(e)     
+                  else:         
+                      print('结果为:',result)    
+        try...except...else...finally结构
+              finally块无论是否发生异常都会被执行，能常用来释放try块中申请的资源
+                try:           
+                    n1=int(input('请输入一个整数:')       
+                    n2=int(input('请输入另一个整数:')       
+                    result=n1/n2       
+                except BaseException as e:           
+                     print('出错了')       
+                     print(e)      
+                else:           
+                     print('结果为:',result)      
+                finally:
+                     print('无论是否产生异常，总会被执行的代码')
+                 print('程序结束')
+                 
+       python常见的异常类型          
+          1. ZeroDivisionError       除（或取模）零（所有数据类型）
+          2. IndexError              序列中没有次索引(index)
+          3. KeyError                映射中没有这个键
+          4. NameError               未声明/初始化对象(没有属性)       
+          5.SyntaxError              Python语法错误       
+          6.ValueError               传入无效的参数       
+                           
+                           
+  traceback模块                         
+      使用trackback模块打印异常信息                     
+          import traceback                 
+          try:                 
+              print('1.----------')             
+              num=10/0             
+           except:           
+               traceback.print_exc()       
+                      
