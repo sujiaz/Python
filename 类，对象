@@ -1,0 +1,18 @@
+1.类属性：类中方法外的变量称为类属性，被该类的所有对象所共享。
+2.类方法：使用@classmethod修饰的方法，使用类名直接访问的方法。
+3.静态方法：使用@staticmethod修饰的主法，使用类名直接访问的方法。
+    print(Student.native_place) #访问类属性
+    Student.cm() #调用类方法
+    Student.sm() #调用静态方法
+    
+动态绑定属性和方法：
+  Python是动态语言，在 创建对象之后，可以动态地绑定属性和方法。
+      def show():
+           print('我是一函数')
+      stu=Student('Jack',20)  
+      stu.gender='男' #动态绑定性别
+      print(stu.name,stu.age,stu.gender)
+      stu.show=show #动态绑定方法
+      stu.show()
+  
+  
